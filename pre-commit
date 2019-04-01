@@ -1,0 +1,23 @@
+#!//usr/bin/env bash
+set ex
+
+usernames=$(cat user-data.yml|yq -r '.users[].name')
+passwords=$(cat user-data.yml|yq -r '.users[].plain_text_passwd')
+
+for username in ${usernames[*]};
+do
+    if [ "${username}" != pirate ]
+    then
+        echo "username should be pirate, not ${username}"
+        exit 1
+    fi
+done
+
+for password in ${passwords[*]};
+do
+    if [ "${password}" != hypriot ]
+    then
+        echo "password should be hypriot, not ${password}"
+        exit 1
+    fi
+done
